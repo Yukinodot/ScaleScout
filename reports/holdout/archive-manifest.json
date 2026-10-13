@@ -1,0 +1,6 @@
+{
+  "archive": "traces.zip",
+  "count": 448,
+  "sha256": "248328b6d8bd3000b9f6b9fcdbe0abca56eb5b774a2976177d3170e80e1e2604",
+  "contents": "Full per-image prediction and selection trace JSON; no images or weights"
+}

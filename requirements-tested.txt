@@ -1,0 +1,7 @@
+ultralytics==8.4.176
+torch==2.6.0+cu124
+torchvision==0.21.0+cu124
+numpy==2.4.4
+Pillow==12.2.0
+opencv-python==5.0.0.93
+pytest==9.1.1

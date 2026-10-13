@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scale-scout"
+version = "0.1.0"
+description = "Explainable budgeted zoom for YOLO small-object detection"
+requires-python = ">=3.10"
+license = {text = "AGPL-3.0-or-later"}
+dependencies = ["numpy>=1.24", "Pillow>=10"]
+
+[project.optional-dependencies]
+yolo = ["ultralytics>=8.3,<9"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+scalescout = "scalescout.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

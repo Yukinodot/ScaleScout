@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ScaleScout · 区域选择实验室</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header><a href="https://github.com/Yukinodot/ScaleScout" class="brand">S<span>↗</span> ScaleScout</a><span class="tag">YOLO / SMALL OBJECTS</span></header>
+  <div class="intro"><div><p class="eyebrow">区域选择实验室</p><h1>有限预算下，<br>哪些区域值得再看？</h1><p>一遍全图检测，几次局部复查。查看真实模型输出，理解每个计算名额花在哪里。</p></div><div class="intro-note"><strong>研究问题</strong><p>同样额外检测 3 个区域，依据线索选择能否比均匀选择找回更多小目标？</p><small>此页面查看已运行结果。Python 执行模型推理。<br>没有原图时只显示真实坐标与区域记录。</small></div></div>
+  <section class="workspace">
+    <aside>
+      <h2>检查一次预测</h2>
+      <label for="case">实验图片</label><select id="case"></select>
+      <label for="strategy">检测策略</label><select id="strategy"></select>
+      <div class="stats"><div><small>模型调用</small><strong id="calls">—</strong></div><div><small>输出目标</small><strong id="objects">—</strong></div></div>
+      <div class="checks"><label><input type="checkbox" id="tiles" checked> 选中区域</label><label><input type="checkbox" id="boxes" checked> 最终检测框</label><label><input type="checkbox" id="skipped"> 未选区域</label></div>
+      <hr>
+      <label class="upload">导入预测 trace.json<input type="file" id="trace-file" accept=".json"></label>
+      <label class="upload secondary">载入对应原图<input type="file" id="image-file" accept="image/*"></label>
+      <p class="hint" id="image-status">原图没有随仓库分发。文件只在本地读取。</p>
+      <p class="hint">生成新结果：<code>scalescout photo.jpg --budget 3</code></p>
+    </aside>
+    <div class="inspection">
+      <div class="canvas-title"><span id="sample-title">加载真实实验记录</span><span id="size">—</span></div>
+      <div class="canvas-wrap"><canvas id="canvas"></canvas></div>
+      <div class="legend"><span><i class="mint"></i>检测框</span><span><i class="amber"></i>选中切片</span><span><i class="gray"></i>原图坐标背景</span></div>
+      <p class="hint" id="detail"></p>
+    </div>
+  </section>
+  <section class="evidence">
+    <div class="section-title"><div><p class="eyebrow">选择证据</p><h2>区域分数与执行顺序</h2></div><p>原始分数用于解释，不是目标存在概率。</p></div>
+    <div class="table-wrap"><table><thead><tr><th>区域</th><th>原图坐标</th><th>纹理细节</th><th>检测线索</th><th>执行</th></tr></thead><tbody id="tile-table"></tbody></table></div>
+  </section>
+  <section class="evidence">
+    <div class="section-title"><div><p class="eyebrow">相同预算的对照</p><h2>真实实验概览</h2></div><p id="protocol"></p></div>
+    <div class="table-wrap"><table><thead><tr><th>策略</th><th>调用 / 图</th><th>Precision50</th><th>Recall50</th><th>小目标 Recall50</th><th>中位耗时</th></tr></thead><tbody id="metrics"></tbody></table></div>
+    <p class="limit">固定置信度、IoU≥0.5 的诊断指标；小目标按原图框面积 &lt; 32² 像素定义。这些结果不是 COCO mAP，64 图子集不能证明普遍优势。完整切片使用更高预算。</p>
+  </section>
+  <footer><span>ScaleScout · 可解释的预算调度实验</span><a href="../reports/initial/RESULTS.md">报告与限制</a><a href="../docs/METHOD.md">方法说明</a><a href="../README.md">运行说明</a></footer>
+</main>
+<script src="preview-data.js"></script><script src="app.js"></script>
+</body></html>
